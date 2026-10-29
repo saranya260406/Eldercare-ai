@@ -433,4 +433,4 @@ server.listen(PORT, () => {
   console.log(`=======================================================`);
 });
 
-module.exports = server;
+module.exports = { handleRequest };
