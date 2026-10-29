@@ -1,0 +1,57 @@
+[
+  {
+    "id": "c1",
+    "name": "Priya Ramanathan",
+    "tamilName": "பிரியா ராமநாதன்",
+    "relation": "Daughter & Primary Caregiver",
+    "tamilRelation": "மகள் (முதன்மை பராமரிப்பாளர்)",
+    "phone": "+91 98401 23456",
+    "badge": "Primary Caregiver",
+    "isPrimary": true,
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80"
+  },
+  {
+    "id": "c2",
+    "name": "Dr. K. Arvind MD",
+    "tamilName": "டாக்டர் கே. அரவிந்த்",
+    "relation": "Family Physician & Cardiologist",
+    "tamilRelation": "குடும்ப மருத்துவர் (இதய சிகிச்சை)",
+    "phone": "+91 94440 98765",
+    "badge": "Doctor",
+    "isDoctor": true,
+    "photo": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&q=80"
+  },
+  {
+    "id": "c3",
+    "name": "Emergency Ambulance Service (108)",
+    "tamilName": "108 அவசர ஆம்புலன்ஸ் சேவை",
+    "relation": "State Emergency Response",
+    "tamilRelation": "அவசரக்கால மருத்துவ ஊர்தி",
+    "phone": "108",
+    "badge": "Emergency 24x7",
+    "isEmergency": true,
+    "photo": "https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=120&q=80"
+  },
+  {
+    "id": "c4",
+    "name": "S. Kannan",
+    "tamilName": "எஸ். கண்ணன்",
+    "relation": "Next-door Neighbor (Ground Floor)",
+    "tamilRelation": "அண்டை வீட்டார் (தரைத்தளம்)",
+    "phone": "+91 98840 55432",
+    "badge": "Neighbor",
+    "isNeighbor": true,
+    "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
+  },
+  {
+    "id": "c5",
+    "name": "Apollo 24x7 Hospital Emergency",
+    "tamilName": "அப்பல்லோ அவசர சிகிச்சை பிரிவு",
+    "relation": "Nearest Hospital (1.8 km away)",
+    "tamilRelation": "அருகிலுள்ள மருத்துவமனை (1.8 கி.மீ)",
+    "phone": "+91 44 2829 0200",
+    "badge": "Hospital",
+    "isHospital": true,
+    "photo": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=120&q=80"
+  }
+]

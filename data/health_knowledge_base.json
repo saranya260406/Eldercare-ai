@@ -1,0 +1,58 @@
+[
+  {
+    "keywords": ["tea", "sugar tablet", "metformin", "breakfast", "after food", "சாப்பாடு", "டீ", "மாத்திரை", "சர்க்கரை மாத்திரை"],
+    "englishQuestion": "Can I take my sugar tablet after drinking tea?",
+    "tamilQuestion": "தேநீர் குடித்த பிறகு சர்க்கரை மாத்திரை போடலாமா?",
+    "englishAnswer": "Vanakkam Ramanathan sir! Metformin and diabetes tablets should be taken within 15 minutes of having your breakfast. If you only had plain tea, please eat your breakfast (like idli, dosai, or oats) first, and then take the tablet with warm water. Taking diabetes medication on an empty stomach after just tea can cause gastric irritation or low blood sugar.",
+    "tamilAnswer": "வணக்கம் ராமநாதன் ஐயா! சர்க்கரை மாத்திரையை (மெட்பார்மின்) காலை உணவை சாப்பிட்ட 15 நிமிடத்திற்குள் எடுத்துக்கொள்வது சிறந்தது. வெறும் டீ மட்டும் குடித்திருந்தால் மாத்திரை போட வேண்டாம்; இட்லி அல்லது சிற்றுண்டி சாப்பிட்டுவிட்டு வெதுவெதுப்பான தண்ணீருடன் மாத்திரை போடுங்கள். வெறும் வயிற்றில் போட்டால் நெஞ்செரிச்சல் அல்லது மயக்கம் வரலாம்."
+  },
+  {
+    "keywords": ["bp", "blood pressure", "reading", "ரத்த அழுத்தம்", "அளவீடு", "பிரஷர்"],
+    "englishQuestion": "What is my current blood pressure reading?",
+    "tamilQuestion": "எனது இரத்த அழுத்த அளவு எப்படி உள்ளது?",
+    "englishAnswer": "Your latest Blood Pressure is 120/80 mmHg, which is considered perfectly normal and healthy for your age. Keep taking your Telmisartan 40mg on time, drink adequate water, and limit excess salt in your food.",
+    "tamilAnswer": "உங்கள் சமீபத்திய ரத்த அழுத்தம் 120/80 mmHg ஆக உள்ளது. இது உங்கள் வயதிற்கு மிகவும் சிறப்பான மற்றும் இயல்பான அளவு (Normal). வழக்கமான டெல்மிசார்டன் மருந்தை நேரத்திற்கு எடுத்துக்கொள்ளுங்கள், உணவில் உப்பை குறைவாக சேர்த்துக்கொள்ளுங்கள்."
+  },
+  {
+    "keywords": ["chest pain", "breathless", "pain in arm", "emergency", "நெஞ்சு வலி", "மூச்சு திணறல்", "அவசரம்", "வலி"],
+    "englishQuestion": "I have chest discomfort or breathing trouble, what should I do?",
+    "tamilQuestion": "நெஞ்சு அசௌகரியமாக உள்ளது அல்லது மூச்சு விட கஷ்டமாக இருந்தால் என்ன செய்வது?",
+    "englishAnswer": "ALERT: If you are experiencing chest pain, tightness, or shortness of breath, please sit down immediately. Press the RED Emergency SOS button on your screen right away to alert Priya and local emergency services. Do not exert yourself or walk alone.",
+    "tamilAnswer": "எச்சரிக்கை: நெஞ்சு வலியோ அல்லது மூச்சுத் திணறலோ இருந்தால் உடனே அமைதியாக ஓரிடத்தில் அமருங்கள்! உடனே திரையிலுள்ள சிவப்பு நிற 'EMERGENCY SOS' பொத்தானை அழுத்துங்கள். உங்கள் மகள் பிரியாவிற்கும் அவசர மருத்துவ உதவிக்கும் உடனே தகவல் சென்றுவிடும். பயப்படாமல் அமைதியாக இருங்கள்."
+  },
+  {
+    "keywords": ["joint pain", "knee pain", "calcium", "மூட்டு வலி", "கால் வலி", "எலும்பு"],
+    "englishQuestion": "What can I do for knee or joint stiffness?",
+    "tamilQuestion": "மூட்டு வலி மற்றும் கால் அசௌகரியத்திற்கு என்ன செய்யலாம்?",
+    "englishAnswer": "Ensure you take your Calcium + Vitamin D3 tablet after lunch as prescribed by Dr. Meenakshi. Do gentle 10-minute chair stretches and avoid standing for prolonged hours. Applying a warm compress can also provide soothing comfort.",
+    "tamilAnswer": "மதிய உணவுக்குப் பின் டாக்டர் மீனாட்சி பரிந்துரைத்த கால்சியம் + வைட்டமின் டி3 மாத்திரையை தவறாமல் எடுத்துக்கொள்ளுங்கள். நாற்காலியில் அமர்ந்து மெதுவான உடற்பயிற்சி செய்யலாம். வலி உள்ள இடத்தில் வெதுவெதுப்பான ஒத்தடம் கொடுப்பது நல்ல நிம்மதியைத் தரும்."
+  },
+  {
+    "keywords": ["water", "hydration", "தண்ணீர்", "தாகம்", "நீர்"],
+    "englishQuestion": "How much water should I drink today?",
+    "tamilQuestion": "இன்று எவ்வளவு தண்ணீர் குடிக்க வேண்டும்?",
+    "englishAnswer": "Your daily hydration goal is 8 glasses (approximately 2 Litres). You have completed 4 glasses so far today. Drinking water at regular intervals keeps your kidneys healthy and prevents dizziness.",
+    "tamilAnswer": "இன்றைய இலக்கு 8 டம்ளர் (சுமார் 2 லிட்டர்) தண்ணீர். இதுவரை 4 டம்ளர் குடித்திருக்கிறீர்கள். ஒவ்வொரு மணி நேரத்திற்கும் ஒரு டம்ளர் வெதுவெதுப்பான நீர் குடிப்பது தலைசுற்றலை தடுக்கும் மற்றும் புத்துணர்ச்சியாக வைத்திருக்கும்."
+  },
+  {
+    "keywords": ["dizzy", "headache", "tired", "மயக்கம்", "தலைசுற்றல்", "சோர்வு", "தலைவலி"],
+    "englishQuestion": "I am feeling a little dizzy or tired.",
+    "tamilQuestion": "எனக்கு லேசாக தலைசுற்றல் அல்லது சோர்வாக இருக்கிறது.",
+    "englishAnswer": "Please sit or lie down safely with your head slightly supported. Sip a glass of water or tender coconut water. We will notify Priya. If dizziness persists, let us check your blood sugar and blood pressure.",
+    "tamilAnswer": "உடனே பாதுகாப்பாக கட்டிலிலோ நாற்காலியிலோ அமருங்கள் ஐயா. ஒரு டம்ளர் தண்ணீர் அல்லது இளநீர் குடியுங்கள். உடனடியாக உங்கள் கவனிப்பாளர் பிரியாவிற்கு தகவல் அனுப்புகிறேன். மயக்கம் தொடர்ந்தால் சர்க்கரை மற்றும் ரத்த அழுத்த அளவை சரிபார்க்கலாம்."
+  },
+  {
+    "keywords": ["sleep", "insomnia", "இரவு தூக்கம்", "தூக்கம் வரவில்லை", "தூங்க"],
+    "englishQuestion": "Tips for good night sleep for elders?",
+    "tamilQuestion": "இரவில் நிம்மதியாக தூங்க என்ன செய்ய வேண்டும்?",
+    "englishAnswer": "Drink half a glass of warm milk 30 minutes before bed. Keep bedroom lighting dim and avoid screens. Take your Atorvastatin and night medications as scheduled by 9:30 PM. Listening to soothing chanting or calm music will relax your mind.",
+    "tamilAnswer": "தூங்குவதற்கு 30 நிமிடத்திற்கு முன் சிறிதளவு வெதுவெதுப்பான பால் அருந்துங்கள். இரவு 9:30 மணிக்கு உங்கள் இரவு மாத்திரைகளை எடுத்துக்கொள்ளுங்கள். மெல்லிய பக்திப் பாடல்கள் அல்லது அமைதியான இசையைக் கேட்பது மனதை அமைதிப்படுத்தி நல்ல ஆழ்ந்த தூக்கத்தைத் தரும்."
+  },
+  {
+    "keywords": ["walk", "exercise", "நடை", "உடற்பயிற்சி", "வாக்கிங்"],
+    "englishQuestion": "How many steps should I walk daily?",
+    "tamilQuestion": "நான் தினமும் எவ்வளவு தூரம் நடக்கலாம்?",
+    "englishAnswer": "Your daily target is 2,000 gentle steps. You have already completed 1,200 steps (60%) today! Walk at a comfortable, unhurried pace wearing comfortable slippers or shoes, preferably on level ground.",
+    "tamilAnswer": "உங்கள் தினசரி இலக்கு 2,000 அடிகள். இன்று ஏற்கனவே 1,200 அடிகள் (60%) முடித்துவிட்டீர்கள்! மிகவும் நல்லது. அவசரப்படாமல் மெதுவாக, சமமான தரையில் கைத்தடி அல்லது ஆதரவுடன் நடப்பது பாதுகாப்பானது."
+  }
+]

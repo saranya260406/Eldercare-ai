@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-27",
+  "water": {
+    "current": 2,
+    "target": 8,
+    "unit": "Glasses (250ml each)",
+    "lastLogged": "11:20 PM"
+  },
+  "walk": {
+    "currentSteps": 1400,
+    "targetSteps": 2000,
+    "caloriesBurned": 56,
+    "distanceKm": 0.98,
+    "percentage": 70,
+    "status": "Good Pace / சிறப்பான நடை"
+  },
+  "sleep": {
+    "hours": 7.5,
+    "quality": "Restful (ஆழ்ந்த உறக்கம்)"
+  },
+  "medicationAdherence": {
+    "totalDosesToday": 7,
+    "takenCount": 7,
+    "adherenceRate": "92% this month"
+  }
+}

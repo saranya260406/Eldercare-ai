@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ElderCare AI – Smart Health & Senior Care Companion</title>
+  <meta name="description" content="ElderCare AI – Senior Healthcare Platform with SQLite Database, Tamil Voice AI, Daily Safety Check-in, Visual Pillbox & 1-Tap SOS.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans Tamil for pristine Tamil typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="senior-mode">
+
+  <!-- ================= Mobile App Frame ================= -->
+  <div class="mobile-app-shell">
+
+    <!-- Mobile Smartphone Top Status Bar -->
+    <div class="mobile-status-bar">
+      <div class="mobile-time" id="status-clock">9:41</div>
+      <div class="mobile-notch"></div>
+      <div class="mobile-status-right">
+        <span>5G</span>
+        <span>📶</span>
+        <span>🛜</span>
+        <span>100% 🔋</span>
+      </div>
+    </div>
+
+    <!-- ================= Top Mobile Header ================= -->
+    <header class="app-header">
+      <div class="header-container">
+        <a href="/" class="brand-wrapper">
+          <div class="brand-icon-box" aria-hidden="true">💙</div>
+          <div class="brand-titles">
+            <h1>ElderCare</h1>
+            <p data-i18n="brandSubtitle">முதியோர் நல்வாழ்வுத் துணை</p>
+          </div>
+        </a>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <!-- Audio Waveform when AI Voice Speaks -->
+          <div class="audio-wave-box" title="AI குரல் பேசுகிறது" data-i18n-title="audioWaveTitle">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </div>
+
+          <!-- Font Zoom Controls -->
+          <div class="font-zoom-ctrl" title="எழுத்து அளவை மாற்றவும் (A- / A+)" data-i18n-title="fontZoomTitle">
+            <button class="font-zoom-btn" onclick="adjustFontSize('smaller')" type="button" aria-label="A-">A-</button>
+            <button class="font-zoom-btn" onclick="adjustFontSize('larger')" type="button" aria-label="A+">A+</button>
+          </div>
+
+          <!-- Language Switcher (Defaults to pure Tamil) -->
+          <button id="btn-lang-toggle" class="pill-btn" onclick="toggleLanguage()" type="button" aria-label="Language toggle">
+            <span class="icon">🌐</span> <span id="lang-btn-text">தமிழ்</span>
+          </button>
+
+          <!-- Medical Emergency ID Card Button -->
+          <button class="pill-btn" onclick="openMedicalIdModal()" type="button" aria-label="Medical ID Card" style="background:#e7f5ff;color:#1971c2;border-color:#a5d8ff;">
+            <span>🪪</span>
+          </button>
+
+          <!-- Quick 1-Tap SOS -->
+          <button class="sos-mini-btn" onclick="triggerSOSModal()" type="button" aria-label="SOS button">
+            <span>🚨 SOS</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Category Pill Strip (Fast Thumb Switching) -->
+    <div class="nav-tabs-wrapper">
+      <nav class="nav-tabs" aria-label="Mobile Navigation">
+        <button class="nav-tab active" data-tab="home" onclick="switchTab('home')">
+          <span>🏠</span> <span data-i18n="tabHome">முகப்பு</span>
+        </button>
+        <button class="nav-tab" data-tab="voice" onclick="switchTab('voice')">
+          <span>🎙️</span> <span data-i18n="tabVoice">குரல் AI</span>
+        </button>
+        <button class="nav-tab" data-tab="meds" onclick="switchTab('meds')">
+          <span>💊</span> <span data-i18n="tabMeds">மருந்துகள்</span>
+        </button>
+        <button class="nav-tab" data-tab="vitals" onclick="switchTab('vitals')">
+          <span>🩺</span> <span data-i18n="tabVitals">உடல் நலம்</span>
+        </button>
+        <button class="nav-tab" data-tab="nutrition" onclick="switchTab('nutrition')">
+          <span>🥗</span> <span data-i18n="tabNutrition">உணவு</span>
+        </button>
+        <button class="nav-tab" data-tab="sos" onclick="switchTab('sos')">
+          <span>🚨</span> <span data-i18n="tabSos">அவசரம்</span>
+        </button>
+        <button class="nav-tab" data-tab="profile" onclick="switchTab('profile')">
+          <span>👤</span> <span data-i18n="tabProfile">விவரம்</span>
+        </button>
+      </nav>
+    </div>
+
+  <!-- ================= Main Content Wrapper ================= -->
+  <main class="main-wrapper">
+
+    <!-- 1. HOME DASHBOARD VIEW -->
+    <section id="section-home" class="view-section active">
+
+      <!-- Daily Safety Check-in Banner ("நான் நலமாக உள்ளேன்" / "Are You Feeling Well?") -->
+      <div id="safety-checkin-container">
+        <div class="safety-checkin-banner">
+          <div class="checkin-left">
+            <div class="checkin-icon">☀️</div>
+            <div class="checkin-info">
+              <h3 data-i18n="safeCheckinQuestion">காலை வணக்கம் ஐயா! நலமாக உள்ளீர்களா?</h3>
+              <p data-i18n="safeCheckinPrompt">நீங்கள் நலமாக உள்ளீர்கள் என்பதை மகள் பிரியாவிற்கு தெரிவிக்க ஒருமுறை தொடவும்.</p>
+            </div>
+          </div>
+          <div>
+            <button class="btn-checkin-action" onclick="doSafetyCheckin()" type="button">
+              <span>💚</span> <span data-i18n="safeCheckinBtn">நான் நலமாக உள்ளேன் 💚</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Senior Hero Card -->
+      <div class="senior-hero-card">
+        <div class="hero-top-row">
+          <div>
+            <div class="senior-name-badge">
+              <span>☀️</span>
+              <span data-i18n="greetingMorning">காலை வணக்கம் ஐயா</span>
+            </div>
+            <h2 id="hero-senior-name" class="senior-greeting-title">வணக்கம், ராமநாதன் ஐயா</h2>
+            <p class="senior-date-sub" data-i18n="todayIs">இன்று செவ்வாய்க்கிழமை, 28 அக்டோபர்</p>
+          </div>
+          <button class="hero-audio-btn" onclick="readScreenAloud()" type="button" aria-label="Read health summary aloud in Tamil">
+            <span style="font-size:24px;">🔊</span>
+            <span class="label" data-i18n="readAloud">குரலில் கேட்க</span>
+          </button>
+        </div>
+
+        <div class="caregiver-live-status">
+          <span class="pulse-indicator"></span>
+          <span data-i18n="caregiverActive">மகள் பிரியா தொடர்ந்து கவனித்து வருகிறார் • Caregiver Priya is active</span>
+        </div>
+      </div>
+
+      <!-- 1-Tap SOS Emergency Banner -->
+      <button class="sos-hero-card" onclick="triggerSOSModal()" type="button">
+        <div class="sos-hero-left">
+          <div class="sos-hero-icon">🚨</div>
+          <div class="sos-hero-text">
+            <h3 class="sos-hero-title" data-i18n="sosHeroTitle">அவசர உதவி SOS</h3>
+            <p class="sos-hero-sub" data-i18n="sosHeroSub">1-தட்டல் அவசர உதவி • குடும்பத்தினர் &amp; 108 ஆம்புலன்ஸுக்கு தகவல்</p>
+          </div>
+        </div>
+        <span class="sos-hero-arrow">➔</span>
+      </button>
+
+      <!-- Dashboard Two-Column Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Left Column: Medication, Vitals & Time-based Pill Box -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          
+          <!-- Next Medicine Dose Card with Voice Alarm Test -->
+          <div class="card">
+            <div id="next-dose-container">
+              <!-- Dynamically populated from SQLite DB via app.js -->
+            </div>
+          </div>
+
+          <!-- Visual 3-Part Pill Box (காலை, மதியம், இரவு) -->
+          <div class="card">
+            <div class="card-header-row">
+              <h3 class="card-title">
+                <span>💊</span> <span data-i18n="pillboxTitle">கால வரிசை மாத்திரை பெட்டி (Visual Pill Box)</span>
+              </h3>
+              <button class="pill-btn" onclick="switchTab('meds')" type="button">
+                <span data-i18n="viewAllMeds">முழு அட்டவணை ➔</span>
+              </button>
+            </div>
+            <div id="visual-pillbox-container">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Quick Vitals Summary Card with Tamil Speech Buttons -->
+          <div class="card">
+            <div class="card-header-row">
+              <h3 class="card-title">
+                <span>🩺</span> <span data-i18n="vitalsTitle">இன்றைய உடல் நலம்</span>
+              </h3>
+              <button class="pill-btn" onclick="switchTab('vitals')" type="button">
+                <span data-i18n="history">முந்தைய பதிவுகள்</span> ➔
+              </button>
+            </div>
+            <div id="vitals-summary-grid" class="vitals-grid">
+              <!-- Dynamically populated from SQLite DB -->
+            </div>
+          </div>
+
+          <!-- Quick Actions Grid (Extra Large Click Targets for Seniors) -->
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom:16px;">
+              <span>⚡</span> <span data-i18n="quickActions">விரைவு இணைப்புகள்</span>
+            </h3>
+            <div class="quick-actions-grid">
+              <button class="btn btn-secondary quick-action-btn" onclick="switchTab('meds')" type="button">
+                <span class="qa-icon">💊</span>
+                <div class="qa-text">
+                  <b data-i18n="qaMeds">மருந்துகள்</b>
+                  <small data-i18n="qaMedsSub">தினசரி அட்டவணை</small>
+                </div>
+              </button>
+              <button class="btn btn-primary quick-action-btn" onclick="switchTab('voice')" type="button">
+                <span class="qa-icon">🎙️</span>
+                <div class="qa-text">
+                  <b data-i18n="qaVoice">AI வாய்ஸ்</b>
+                  <small data-i18n="qaVoiceSub">குரல் உதவி</small>
+                </div>
+              </button>
+              <a href="tel:+919840123456" class="btn btn-secondary quick-action-btn">
+                <span class="qa-icon">📞</span>
+                <div class="qa-text">
+                  <b data-i18n="qaFamily">பிரியா அழைப்பு</b>
+                  <small data-i18n="qaFamilySub">மகள் (முதன்மை)</small>
+                </div>
+              </a>
+              <button class="btn btn-secondary quick-action-btn" onclick="switchTab('nutrition')" type="button">
+                <span class="qa-icon">🥗</span>
+                <div class="qa-text">
+                  <b data-i18n="qaNutrition">உணவு முறை</b>
+                  <small data-i18n="qaNutritionSub">முதியோர் டயட்</small>
+                </div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Goals, Appointments, Meditation & DB Status -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          
+          <!-- Doctor Consultations Card -->
+          <div class="card">
+            <div class="card-header-row">
+              <h3 class="card-title">
+                <span>🏥</span> <span data-i18n="doctorApptTitle">அடுத்த மருத்துவ சந்திப்பு</span>
+              </h3>
+              <span class="card-badge">Kauvery Hospital</span>
+            </div>
+            <div id="doctor-appointments-box">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Daily Goals: Water Hydration & Walking -->
+          <div class="card">
+            <div class="card-header-row">
+              <h3 class="card-title">
+                <span>🎯</span> <span data-i18n="dailyGoals">இன்றைய ஆரோக்கிய இலக்குகள்</span>
+              </h3>
+              <span class="card-badge">Daily Track</span>
+            </div>
+
+            <!-- Clean Blue-and-White Hydration Level Section -->
+            <div class="hydration-card" id="hydration-section-card">
+              <!-- Top Header Row -->
+              <div class="hydration-header">
+                <div class="hydration-header-left">
+                  <div class="hydration-icon-badge">💧</div>
+                  <div>
+                    <h4 class="hydration-title" data-i18n="hydrationTitle">நீர்ச்சத்து கண்காணிப்பு</h4>
+                    <p class="hydration-subtitle" data-i18n="hydrationSub">தினசரி 2.0 லிட்டர் தண்ணீர் உடலுக்கு அவசியம்</p>
+                  </div>
+                </div>
+                <div class="hydration-badge" id="hydration-pct-badge">63%</div>
+              </div>
+
+              <!-- Metrics Summary Row -->
+              <div class="hydration-metrics-row">
+                <div class="hydration-metric-col">
+                  <span class="hydration-metric-label" data-i18n="hydrationIntakeLabel">அருந்திய அளவு</span>
+                  <div class="hydration-metric-val">
+                    <span id="water-intake-liters" class="hydration-val-num">1.25</span>
+                    <span class="hydration-val-unit">L</span>
+                    <span id="water-intake-glasses" class="hydration-glasses-sub">(5 டம்ளர்கள்)</span>
+                  </div>
+                </div>
+                <div class="hydration-metric-divider"></div>
+                <div class="hydration-metric-col">
+                  <span class="hydration-metric-label" data-i18n="hydrationGoalLabel">தினசரி இலக்கு</span>
+                  <div class="hydration-metric-val">
+                    <span id="water-goal-liters" class="hydration-val-num">2.0</span>
+                    <span class="hydration-val-unit">L</span>
+                    <span id="water-goal-glasses" class="hydration-glasses-sub">(8 டம்ளர்கள்)</span>
+                  </div>
+                </div>
+                <div class="hydration-metric-divider"></div>
+                <div class="hydration-metric-col">
+                  <span class="hydration-metric-label" data-i18n="hydrationRemainingLabel">இன்னும் தேவை</span>
+                  <div class="hydration-metric-val">
+                    <span id="water-remaining-liters" class="hydration-val-num" style="color:#0284c7;">0.75</span>
+                    <span class="hydration-val-unit" style="color:#0284c7;">L</span>
+                    <span id="water-remaining-glasses" class="hydration-glasses-sub">(3 டம்ளர்கள்)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visual Progress Bar -->
+              <div class="hydration-bar-container">
+                <div class="hydration-bar-track">
+                  <div id="hydration-bar-fill" class="hydration-bar-fill" style="width: 63%;"></div>
+                </div>
+              </div>
+
+              <!-- Interactive Clickable Glass Slots Grid -->
+              <div id="water-slots-grid" class="hydration-slots-grid"></div>
+
+              <!-- Quick-Add Water Action Buttons -->
+              <div class="hydration-actions-row">
+                <button class="hydration-btn hydration-btn-primary" onclick="logWaterGlass(1)" type="button">
+                  <span>💧</span> <span data-i18n="add1Glass">+1 டம்ளர் (+250ml)</span>
+                </button>
+                <button class="hydration-btn hydration-btn-secondary" onclick="logWaterGlass(2)" type="button">
+                  <span>🌊</span> <span data-i18n="add2Glasses">+2 டம்ளர்கள் (+500ml)</span>
+                </button>
+                <button class="hydration-btn hydration-btn-outline" onclick="logWaterGlass(-1)" type="button" title="Remove 1 glass">
+                  <span>↩️</span> <span data-i18n="undoGlass">-1 டம்ளர்</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Gentle Walking -->
+            <div class="walk-tracker-box">
+              <div class="walk-tracker-header">
+                <div class="walk-tracker-left">
+                  <span class="walk-icon">🚶</span>
+                  <div>
+                    <strong style="display:block;" data-i18n="walkTitle">மெது நடை பயிற்சி</strong>
+                    <span id="walk-step-label" style="font-size:13px;color:var(--text-muted);">1,200 of 2,000 steps</span>
+                  </div>
+                </div>
+                <div class="walk-tracker-right">
+                  <span id="walk-pct-label" class="walk-pct-label">60%</span>
+                  <button class="btn btn-secondary" onclick="addWalkSteps(200)" style="padding:6px 10px;font-size:12px;" type="button" title="Add 200 steps">
+                    +200
+                  </button>
+                </div>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="walk-progress-fill" class="progress-bar-fill" style="width: 60%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mental Peace & 432Hz Meditation Music Player -->
+          <div class="card meditation-player-card">
+            <div class="card-header-row" style="margin-bottom:8px;">
+              <h3 class="card-title" style="font-size:17px;color:#5f3dc4;">
+                <span>🧘</span> <span data-i18n="wellnessTitle">மன அமைதி &amp; தியான இசை</span>
+              </h3>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div id="meditation-wave-indicator" class="meditation-wave-box" title="Playing 432Hz Audio">
+                  <span class="med-wave-bar"></span>
+                  <span class="med-wave-bar"></span>
+                  <span class="med-wave-bar"></span>
+                  <span class="med-wave-bar"></span>
+                  <span class="med-wave-bar"></span>
+                </div>
+                <span class="card-badge" style="background:#f3f0ff;color:#7950f2;">432Hz Healing Sound</span>
+              </div>
+            </div>
+            <p style="font-size:13px;color:var(--text-muted);line-height:1.5;" data-i18n="wellnessDesc">
+              பதற்றத்தைக் குறைத்து, மன அமைதி மற்றும் ஆழ்ந்த தூக்கத்திற்கு உதவும் மென்மையான தியான ஒலி.
+            </p>
+            <div class="meditation-player-row">
+              <button id="btn-calm-music" class="btn-ambient-play" onclick="toggleCalmingSound()" type="button">
+                <span id="btn-calm-music-icon">🎵</span> <span id="btn-calm-music-text" data-i18n="calmMusicBtn">தியான இசை தொடங்க</span>
+              </button>
+              <div class="meditation-vol-ctrl">
+                <span style="font-size:16px;">🔉</span>
+                <input type="range" id="meditation-volume-slider" class="meditation-vol-slider" min="0" max="1" step="0.05" value="0.6" oninput="setMeditationVolume(this.value)" aria-label="Meditation Volume Control">
+                <span style="font-size:16px;">🔊</span>
+                <span id="meditation-vol-value" class="meditation-vol-label">60%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reassurance -->
+          <div style="text-align:center;padding:12px;color:var(--text-muted);font-size:14px;font-weight:600;">
+            <span>🌸</span> <span data-i18n="allWellMsg">எல்லாம் நலமே • நீங்கள் நலமாக உள்ளீர்கள் ஐயா</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 2. AI VOICE COMPANION VIEW (FLUENT TAMIL) -->
+    <section id="section-voice" class="view-section">
+      <div class="card voice-companion-card">
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px;">
+          <span style="font-size:28px;">🤖</span>
+          <h2 style="font-size:24px;font-weight:800;color:var(--primary);" data-i18n="voiceTitle">ElderCare AI குரல் துணை (Tamil Voice Companion)</h2>
+        </div>
+        <p style="color:var(--text-muted);font-size:15px;" data-i18n="micSubText">
+          தமிழிலோ ஆங்கிலத்திலோ தாராளமாக கேளுங்கள் • குடும்பத்தினருடன் பேசுவது போல பேசலாம்
+        </p>
+
+        <!-- Big Pulsing Mic Button for Elders -->
+        <div class="mic-hero-wrapper">
+          <div class="mic-pulse-ring"></div>
+          <div class="mic-pulse-ring"></div>
+          <button id="voiceMicBtn" class="btn-big-mic" onclick="toggleVoiceRecognition()" type="button" aria-label="Tap to speak in Tamil or English">
+            <span class="mic-icon">🎙️</span>
+            <span class="mic-sub" data-i18n="micTapToSpeak">பேச அழுத்தவும்</span>
+          </button>
+        </div>
+
+        <!-- Voice Playback Speed Slider -->
+        <div class="voice-speed-box">
+          <span data-i18n="speedLabel">பேச்சு வேகம்:</span>
+          <input type="range" id="speechSpeedRange" class="speed-slider" min="0.75" max="1.25" step="0.25" value="0.9" aria-label="Voice playback speed">
+          <span id="speedValueLabel" style="min-width:44px;color:var(--primary);font-weight:800;">0.9x</span>
+        </div>
+
+        <!-- Suggested Prompt Chips for Elders (1-Tap Tamil Voice Queries) -->
+        <div style="margin-top:20px;text-align:left;">
+          <span style="font-size:14px;font-weight:800;color:var(--primary);display:block;margin-bottom:8px;" data-i18n="voiceFaqTitle">
+            அடிக்கடி கேட்கப்படும் கேள்விகள் (தொட்டு குரல் பதில் பெறலாம்):
+          </span>
+          <div class="prompt-chips-wrap">
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'தேநீர் குடித்த பிறகு சர்க்கரை மாத்திரை போடலாமா?' : 'Can I take diabetes medication after drinking tea?')" type="button" data-i18n="chipTea">
+              🍵 டீ குடிச்ச பிறகு சர்க்கரை மாத்திரை போடலாமா?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'எனது இரத்த அழுத்த அளவு எப்படி உள்ளது?' : 'How is my blood pressure (BP) today?')" type="button" data-i18n="chipBp">
+              🩺 எனது இரத்த அழுத்தம் (BP) எப்படி உள்ளது?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'இன்று எவ்வளவு தண்ணீர் குடிக்க வேண்டும்?' : 'How much water should I drink today?')" type="button" data-i18n="chipWater">
+              💧 இன்று எவ்வளவு தண்ணீர் குடிக்க வேண்டும்?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'எனக்கு லேசாக தலைசுற்றல் அல்லது சோர்வாக இருக்கிறது.' : 'I feel slightly dizzy or tired today.')" type="button" data-i18n="chipDizzy">
+              😴 எனக்கு லேசாக தலைசுற்றல் அல்லது சோர்வாக இருக்கிறது
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'இரவில் தூக்கம் சரியாக வரவில்லை என்றால் என்ன செய்வது?' : 'What can I do for peaceful sleep tonight?')" type="button" data-i18n="chipSleep">
+              🌙 இரவில் நிம்மதியான தூக்கம் வர என்ன செய்யலாம்?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'வயதானோருக்கான சத்தான மற்றும் சுலபமான உணவு முறை என்ன?' : 'What is a healthy diet for seniors?')" type="button" data-i18n="chipDiet">
+              🥗 முதியோருக்கான எளிய உணவு முறை என்ன?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'எனது அடுத்த மருத்துவ சந்திப்பு எப்போது?' : 'When is my next doctor appointment?')" type="button" data-i18n="chipAppt">
+              🏥 அடுத்த டாக்டர் அப்பாயிண்ட்மென்ட் எப்போது?
+            </button>
+            <button class="chip-btn" onclick="sendChatMessage(state.lang === 'ta' ? 'மகள் பிரியா எண் என்ன?' : 'Call my daughter Priya')" type="button" data-i18n="chipPriya">
+              📞 மகள் பிரியாவை அழைக்கவும்
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Chat Bubble Stream -->
+        <div id="chat-stream" class="chat-stream-box">
+          <!-- Populated by app.js -->
+        </div>
+
+        <!-- Text Input Form for Accessibility -->
+        <form class="chat-input-form" onsubmit="event.preventDefault(); const inp=document.getElementById('manual-chat-input'); sendChatMessage(inp.value); inp.value='';">
+          <input type="text" id="manual-chat-input" class="chat-text-input" placeholder="கேள்வியை தட்டச்சு செய்யவும் (எ.கா. மாத்திரை நேரம் என்ன?)…" data-i18n-placeholder="chatInputPlaceholder">
+          <button type="submit" class="btn btn-primary chat-submit-btn" data-i18n="chatSendBtn">
+            அனுப்ப
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- 3. MEDICATIONS VIEW -->
+    <section id="section-meds" class="view-section">
+      <div class="card">
+        <div class="card-header-row">
+          <div>
+            <h2 class="card-title"><span>💊</span> <span data-i18n="medsTitle">மருந்துகள் அட்டவணை</span></h2>
+            <p style="font-size:14px;color:var(--text-muted);margin-top:4px;" data-i18n="medsDbSub">SQLite டேட்டாபேஸில் சேமிக்கப்பட்டு கண்காணிக்கப்படுகிறது.</p>
+          </div>
+          <button class="btn btn-primary" onclick="promptAddMedicine()" type="button">
+            <span data-i18n="btnAddMed">+ புதிய மருந்து சேர்க்க</span>
+          </button>
+        </div>
+
+        <div id="medications-full-list" class="meds-list-grid">
+          <!-- Populated from SQLite DB -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VITALS & HEALTH VIEW -->
+    <section id="section-vitals" class="view-section">
+      <div class="card">
+        <div class="card-header-row">
+          <div>
+            <h2 class="card-title"><span>🩺</span> <span data-i18n="vitalsHeading">உடல்நல அளவீடுகள் &amp; போக்குகள்</span></h2>
+            <p style="font-size:14px;color:var(--text-muted);margin-top:4px;" data-i18n="vitalsSubtitle">ரத்த அழுத்தம் (BP), சர்க்கரை மற்றும் இதயத்துடிப்பு அளவீடுகள்.</p>
+          </div>
+          <button class="btn btn-primary" onclick="promptLogVitals()" type="button">
+            <span data-i18n="btnLogVital">+ புதிய அளவீடு பதிவு செய்ய</span>
+          </button>
+        </div>
+
+        <!-- SVG Trend Chart -->
+        <div class="chart-container-card">
+          <h4 style="font-size:15px;color:var(--text-muted);margin-bottom:8px;" data-i18n="bpTrendTitle">ரத்த அழுத்த போக்கு (Blood Pressure Trend - கடந்த 7 அளவீடுகள்)</h4>
+          <div id="vitals-svg-chart" class="svg-chart-box">
+            <!-- SVG rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- History Table -->
+        <div style="overflow-x:auto;margin-top:20px;">
+          <table class="vitals-history-table">
+            <thead>
+              <tr>
+                <th data-i18n="thDateTime">தேதி &amp; நேரம்</th>
+                <th data-i18n="thBp">ரத்த அழுத்தம் (BP)</th>
+                <th data-i18n="thSugar">சர்க்கரை அளவு</th>
+                <th data-i18n="thPulse">இதயத்துடிப்பு</th>
+                <th data-i18n="thStatus">முடிவு நிலை</th>
+              </tr>
+            </thead>
+            <tbody id="vitals-table-body">
+              <!-- Populated from SQLite DB -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SENIOR NUTRITION & DIET VIEW -->
+    <section id="section-nutrition" class="view-section">
+      <div class="card">
+        <div class="card-header-row">
+          <div>
+            <h2 class="card-title"><span>🥗</span> <span data-i18n="nutritionHeading">வயதானோருக்கான சத்தான உணவு முறை</span></h2>
+            <p style="font-size:14px;color:var(--text-muted);margin-top:4px;" data-i18n="nutritionSubtitle">
+              சர்க்கரை நோய் மற்றும் ரத்த அழுத்தத்தைக் கட்டுப்படுத்தும் எளிய, செரிமானத்திற்கு உகந்த உணவுப் பரிந்துரைகள்.
+            </p>
+          </div>
+          <button class="btn btn-secondary" onclick="speakText(state.lang === 'ta' ? 'வயதானோருக்கான சத்தான உணவு முறை: காலையில் ஆவியில் வெந்த இட்லி அல்லது ஓட்ஸ் கஞ்சி. மதிய உணவில் பருப்பு, கீரை, மற்றும் மிதமான சாதம். இரவு உணவில் ஆப்பம் அல்லது இடியாப்பம். நாள் முழுவதும் வெதுவெதுப்பான நீர் அருந்தவும்.' : 'Senior Nutrition Guide: Steamed idlis or oats porridge for breakfast. Rice with greens and lentils for lunch. Light dinner with warm turmeric milk.')" type="button">
+            <span data-i18n="nutritionListen">🔊 தமிழில் கேட்க</span>
+          </button>
+        </div>
+
+        <div class="nutrition-grid">
+          <div class="nutrition-item-card">
+            <h4 data-i18n="mealBreakfastTitle"><span>🌅</span> காலை உணவு (8:00 - 9:00 AM)</h4>
+            <p data-i18n="mealBreakfastDesc">
+              ஆவியில் வெந்த 2-3 இட்லி, சாம்பார் அல்லது வெந்தயக் கஞ்சி / ஓட்ஸ். டீ அல்லது காபியில் சர்க்கரை தவிர்ப்பது நலம். காலை உணவுக்குப் பின் சர்க்கரை மாத்திரை எடுத்துக்கொள்ளவும்.
+            </p>
+          </div>
+
+          <div class="nutrition-item-card">
+            <h4 data-i18n="mealLunchTitle"><span>☀️</span> மதிய உணவு (1:00 - 2:00 PM)</h4>
+            <p data-i18n="mealLunchDesc">
+              மிதமான அளவு கைக்குத்தல் அல்லது பொன்னி சாதம், பாசிப்பருப்பு, பொரித்த காய்கறிகளுக்குப் பதிலாக வேகவைத்த கீரை, கேரட், பீன்ஸ். உணவுக்குப் பின் தயிர் அல்லது மோர்.
+            </p>
+          </div>
+
+          <div class="nutrition-item-card">
+            <h4 data-i18n="mealSnackTitle"><span>☕</span> மாலை சிற்றுண்டி (4:30 - 5:30 PM)</h4>
+            <p data-i18n="mealSnackDesc">
+              வேகவைத்த சுண்டல் அல்லது ஒரு ஆப்பிள் / பப்பாளி துண்டுகள். கிரீன் டீ அல்லது வெதுவெதுப்பான நீர் அருந்துங்கள்.
+            </p>
+          </div>
+
+          <div class="nutrition-item-card">
+            <h4 data-i18n="mealDinnerTitle"><span>🌙</span> இரவு உணவு (7:30 - 8:30 PM)</h4>
+            <p data-i18n="mealDinnerDesc">
+              மிகவும் எளிமையான உணவு: 2 சப்பாத்தி அல்லது இடியாப்பம், பருப்பு குருமாவோடு. படுப்பதற்கு முன் ஒரு டம்ளர் வெதுவெதுப்பான பாலில் சிட்டிகை மஞ்சள் தூள் கலந்து அருந்தவும்.
+            </p>
+          </div>
+        </div>
+
+        <!-- Essential Tips -->
+        <div style="background:#e6fcf5;border-radius:var(--radius-md);padding:18px;margin-top:16px;">
+          <h4 style="color:#0ca678;font-size:16px;font-weight:800;margin-bottom:6px;" data-i18n="goldenRulesTitle">⚠️ முதியோர் உணவுக்கான பொன் விதிகள்:</h4>
+          <ul style="font-size:14px;color:#2b8a3e;line-height:1.6;padding-left:18px;">
+            <li data-i18n="goldenRule1">உணவில் உப்பை மிகவும் குறைவாக சேர்த்துக்கொள்ளுங்கள் (ரத்த அழுத்தத்தைக் கட்டுப்படுத்த).</li>
+            <li data-i18n="goldenRule2">குளிர்ந்த தண்ணீரைத் தவிர்த்து எப்போதும் வெதுவெதுப்பான வெந்நீர் அருந்துங்கள்.</li>
+            <li data-i18n="goldenRule3">ஒரே நேரத்தில் அதிகமாக உண்பதைத் தவிர்த்து, சிறிய அளவாக 3-4 வேளைகளாகப் பிரியுங்கள்.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EMERGENCY SOS VIEW -->
+    <section id="section-sos" class="view-section">
+      <div class="card" style="text-align:center;padding:32px 20px;">
+        <div style="max-width:540px;margin:0 auto;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#ffe3e3;color:var(--danger);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;">
+            🚨
+          </div>
+          <h2 style="font-size:28px;font-weight:900;color:var(--danger);" data-i18n="sosPageTitle">அவசர உதவி SOS (Emergency Dispatch)</h2>
+          <p style="font-size:16px;color:var(--text-muted);margin-top:6px;line-height:1.5;" data-i18n="sosPageSub">
+            கீழே உள்ள சிவப்பு நிற பொத்தானை அழுத்தினால் மகள் பிரியாவிற்கும், 108 ஆம்புலன்ஸ் சேவைக்கும் உடனடியாக உங்கள் இருப்பிடத் தகவல் அனுப்பப்படும்.
+          </p>
+
+          <button onclick="triggerSOSModal()" style="margin:28px auto;width:100%;max-width:380px;height:74px;border-radius:var(--radius-full);background:var(--danger-gradient);color:white;font-size:20px;font-weight:900;border:none;cursor:pointer;box-shadow:var(--shadow-danger-glow);display:flex;align-items:center;justify-content:center;gap:12px;">
+            <span data-i18n="sosPageBtn">🚨 அவசர உதவி SOS அழுத்துங்கள்</span>
+          </button>
+
+          <div style="text-align:left;margin-top:28px;">
+            <h3 style="font-size:18px;font-weight:800;margin-bottom:12px;" data-i18n="sosContactsTitle">அவசர தொடர்பு எண்கள்:</h3>
+            <div class="sos-contacts-list">
+              <div class="sos-contact-row">
+                <div>
+                  <b data-i18n="contactPriyaName">பிரியா ராமநாதன் (மகள் &amp; கவனிப்பாளர்)</b>
+                  <div style="font-size:13px;color:var(--text-muted);" data-i18n="contactPriyaRole">முதன்மை கவனிப்பாளர் • +91 98401 23456</div>
+                </div>
+                <a href="tel:+919840123456" class="btn btn-primary" style="padding:8px 16px;font-size:13px;text-decoration:none;" data-i18n="btnCall">அழைக்க 📞</a>
+              </div>
+              <div class="sos-contact-row">
+                <div>
+                  <b data-i18n="contactAmbulanceName">108 அவசர ஆம்புலன்ஸ் சேவை</b>
+                  <div style="font-size:13px;color:var(--text-muted);" data-i18n="contactAmbulanceRole">தமிழ்நாடு அரசு அவசர மருத்துவ ஊர்தி</div>
+                </div>
+                <a href="tel:108" class="btn btn-danger" style="padding:8px 16px;font-size:13px;text-decoration:none;" data-i18n="btnAmbulanceCall">108 அழைக்க 🚑</a>
+              </div>
+              <div class="sos-contact-row">
+                <div>
+                  <b data-i18n="contactDoctorName">டாக்டர் கே. அரவிந்த் (குடும்ப மருத்துவர்)</b>
+                  <div style="font-size:13px;color:var(--text-muted);" data-i18n="contactDoctorRole">காவேரி மருத்துவமனை • +91 94440 98765</div>
+                </div>
+                <a href="tel:+919444098765" class="btn btn-secondary" style="padding:8px 16px;font-size:13px;text-decoration:none;" data-i18n="btnCall">அழைக்க 📞</a>
+              </div>
+              <div class="sos-contact-row">
+                <div>
+                  <b data-i18n="contactNeighborName">எஸ். கண்ணன் (அண்டை வீட்டார்)</b>
+                  <div style="font-size:13px;color:var(--text-muted);" data-i18n="contactNeighborRole">தரைத்தளம் • +91 98840 55432</div>
+                </div>
+                <a href="tel:+919884055432" class="btn btn-secondary" style="padding:8px 16px;font-size:13px;text-decoration:none;" data-i18n="btnCall">அழைக்க 📞</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PROFILE VIEW -->
+    <section id="section-profile" class="view-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title"><span>👤</span> <span data-i18n="profileTitle">முதியோர் &amp; கவனிப்பாளர் விவரம்</span></h2>
+          <span class="card-badge">Verified ID</span>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid var(--border-color);">
+          <div style="width:72px;height:72px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;">
+            <span id="profile-avatar-letter">ரா</span>
+          </div>
+          <div>
+            <h3 id="profile-name" style="font-size:22px;font-weight:800;" data-i18n="profileNameVal">ராமநாதன் சுப்ரமணியன்</h3>
+            <p id="profile-age-gender" style="font-size:15px;color:var(--text-muted);" data-i18n="profileAgeVal">72 வயது • ஆண் • Blood: O+ Positive</p>
+            <p id="profile-caregiver-info" style="font-size:14px;color:var(--primary);font-weight:700;margin-top:4px;" data-i18n="profileCaregiverVal">
+              கவனிப்பாளர்: பிரியா ராமநாதன் (மகள்) • +91 98401 23456
+            </p>
+          </div>
+        </div>
+
+        <div class="profile-details-grid">
+          <div class="profile-info-card">
+            <strong style="color:var(--primary);display:block;margin-bottom:6px;" data-i18n="conditionsTitle">நீண்டகால ஆரோக்கிய நிலைகள்:</strong>
+            <ul style="font-size:14px;color:var(--text-muted);padding-left:18px;line-height:1.6;">
+              <li data-i18n="condDiabetes">வகை-2 சர்க்கரை நோய் (2015 முதல்)</li>
+              <li data-i18n="condBp">உயர் ரத்த அழுத்தம் / BP (2012 முதல்)</li>
+              <li data-i18n="condKnee">மிதமான முழங்கால் தேய்மானம் (2020 முதல்)</li>
+            </ul>
+          </div>
+          <div class="profile-info-card">
+            <strong style="color:var(--primary);display:block;margin-bottom:6px;" data-i18n="addressTitle">வசிப்பிடம்:</strong>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.5;" data-i18n="addressVal">
+              பிளாட் 3B, சாந்தி நிகேதன் அடுக்குமாடி, தி. நகர், சென்னை - 600017
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= Mobile Bottom Navigation Bar ================= -->
+  <nav class="app-bottom-bar" aria-label="Mobile Navigation">
+    <button class="bottom-tab-item active" data-tab="home" onclick="switchTab('home')">
+      <span class="icon">🏠</span>
+      <span data-i18n="tabHome">முகப்பு</span>
+    </button>
+    <button class="bottom-tab-item" data-tab="voice" onclick="switchTab('voice')">
+      <span class="icon">🎙️</span>
+      <span data-i18n="tabVoice">குரல் AI</span>
+    </button>
+    <button class="bottom-tab-item" data-tab="meds" onclick="switchTab('meds')">
+      <span class="icon">💊</span>
+      <span data-i18n="tabMeds">மருந்துகள்</span>
+    </button>
+    <button class="bottom-tab-item" data-tab="vitals" onclick="switchTab('vitals')">
+      <span class="icon">🩺</span>
+      <span data-i18n="tabVitals">உடல் நலம்</span>
+    </button>
+    <button class="bottom-tab-item" data-tab="nutrition" onclick="switchTab('nutrition')">
+      <span class="icon">🥗</span>
+      <span data-i18n="tabNutrition">உணவு</span>
+    </button>
+    <button class="bottom-tab-item tab-sos" data-tab="sos" onclick="switchTab('sos')">
+      <span class="icon">🚨</span>
+      <span data-i18n="tabSos">அவசரம்</span>
+    </button>
+  </nav>
+
+  </div><!-- /.mobile-app-shell -->
+
+  <!-- ================= SOS Countdown Modal ================= -->
+  <div id="sos-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Emergency SOS Alert Modal">
+    <div class="modal-content-card">
+      <div class="sos-countdown-circle">
+        <span id="sos-countdown-num">5</span>
+      </div>
+      <h3 style="font-size:24px;font-weight:900;color:var(--danger);margin-bottom:8px;" data-i18n="sosModalTitle">
+        அவசர உதவி SOS அழைப்பு
+      </h3>
+      <p style="font-size:15px;color:var(--text-muted);line-height:1.5;" data-i18n="sosModalDesc">
+        மகள் பிரியாவிற்கும், 108 ஆம்புலன்ஸிற்கும் உங்கள் GPS இருப்பிடத் தகவல் அனுப்பப்படுகிறது. தவறாக அழுத்தப்பட்டிருந்தால் கீழே உள்ள பொத்தானை அழுத்தவும்.
+      </p>
+
+      <button class="btn-cancel-sos" onclick="cancelSOSModal()" type="button" data-i18n="sosModalCancel">
+        ❌ CANCEL (தவறாக அழுத்தப்பட்டது - ரத்து செய்)
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= Senior Medical Emergency ID Card Modal ================= -->
+  <div id="medical-id-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Senior Health Emergency ID Card">
+    <div class="modal-content-card" style="max-width:520px;text-align:left;padding:24px;">
+      
+      <!-- Card Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #e7f5ff;padding-bottom:12px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:32px;">🪪</span>
+          <div>
+            <h3 style="margin:0;font-size:20px;font-weight:900;color:var(--primary);" data-i18n="medIdModalTitle">மூத்தோர் அவசர மருத்துவ அட்டை</h3>
+            <p style="margin:0;font-size:12px;color:var(--text-muted);font-weight:700;">ElderCare AI Senior Medical ID • Emergency Ready</p>
+          </div>
+        </div>
+        <button onclick="closeMedicalIdModal()" style="background:#f1f3f5;border:none;border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Identity Badge -->
+      <div style="background:#f8f9fa;border:1px solid #dee2e6;border-radius:12px;padding:16px;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:60px;height:60px;border-radius:50%;background:#00646f;color:white;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;">
+            <span id="med-id-avatar-letter">ரா</span>
+          </div>
+          <div>
+            <h4 style="margin:0;font-size:19px;font-weight:900;color:#102b3b;" data-i18n="profileNameVal">ராமநாதன் சுப்ரமணியன்</h4>
+            <div style="font-size:13px;color:#495057;margin-top:2px;" data-i18n="medIdModalAge">
+              <b>வயது:</b> 72 ஆண்டுகள் • <b>பாலினம்:</b> ஆண் (Male)
+            </div>
+            <div style="display:inline-block;margin-top:4px;background:#ffe3e3;color:#c92a2a;padding:2px 8px;border-radius:6px;font-size:13px;font-weight:800;" data-i18n="medIdModalBlood">
+              🩸 ரத்தப் பிரிவு: O+ Positive
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Critical Medical Details -->
+      <div class="med-id-grid">
+        <div class="med-id-card-warn">
+          <b style="color:#d9480f;font-size:13px;display:block;" data-i18n="medIdModalAllergyTitle">⚠️ ஒவ்வாமை (Allergies):</b>
+          <span style="font-size:13px;color:#495057;font-weight:700;" data-i18n="medIdModalAllergyVal">பென்சிலின் (Penicillin) - உயிருக்கு ஆபத்து</span>
+        </div>
+        <div class="med-id-card-ok">
+          <b style="color:#0ca678;font-size:13px;display:block;" data-i18n="medIdModalCondTitle">🩺 நோய்கள் (Conditions):</b>
+          <span style="font-size:12px;color:#2b8a3e;" data-i18n="medIdModalCondVal">வகை-2 சர்க்கரை நோய், உயர் ரத்த அழுத்தம் (BP)</span>
+        </div>
+      </div>
+
+      <!-- Emergency Contacts & Caregiver -->
+      <div style="background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:16px;">
+        <b style="font-size:13px;color:#212529;display:block;margin-bottom:6px;" data-i18n="medIdModalContactsTitle">🚨 அவசர தொடர்பு நபர்கள்:</b>
+        <div style="font-size:13px;color:#495057;line-height:1.6;">
+          • <b data-i18n="contactPriyaName">மகள் பிரியா:</b> <a href="tel:+919840123456" style="color:#00646f;font-weight:700;">+91 98401 23456</a><br>
+          • <b data-i18n="contactDoctorName">டாக்டர் கே. அரவிந்த் (காவேரி):</b> <a href="tel:+919444098765" style="color:#00646f;font-weight:700;">+91 94440 98765</a><br>
+          • <b data-i18n="contactAmbulanceName">அரசு அவசர ஆம்புலன்ஸ்:</b> <a href="tel:108" style="color:#c92a2a;font-weight:800;">108</a>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="med-id-actions">
+        <button class="btn btn-primary" onclick="readMedicalIdAloud()" style="flex:1;justify-content:center;padding:12px;" type="button">
+          <span data-i18n="medIdListenBtn">🔊 தமிழில் கேட்க</span>
+        </button>
+        <button class="btn btn-secondary" onclick="window.print()" style="flex:1;justify-content:center;padding:12px;" type="button">
+          <span data-i18n="medIdPrintBtn">🖨️ பிரிண்ட் / அச்சிட</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-box" class="toast-msg" role="status" aria-live="polite"></div>
+
+  <!-- Application Logic -->
+  <script src="/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+[
+  {
+    "id": "vit-1793198204381",
+    "date": "2026-10-28",
+    "time": "08:06 PM",
+    "bloodPressure": {
+      "systolic": 122,
+      "diastolic": 80,
+      "unit": "mmHg",
+      "status": "Normal (சீரானது)"
+    },
+    "bloodSugar": {
+      "value": 108,
+      "type": "Fasting",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 74,
+      "unit": "BPM",
+      "status": "Steady (அமைதி)"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.4,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Database test vital"
+  },
+  {
+    "id": "vit-7",
+    "date": "2026-10-22",
+    "time": "08:00 AM",
+    "bloodPressure": {
+      "systolic": 118,
+      "diastolic": 78,
+      "unit": "mmHg",
+      "status": "Ideal (மிக நன்று)"
+    },
+    "bloodSugar": {
+      "value": 105,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Ideal"
+    },
+    "pulse": {
+      "value": 68,
+      "unit": "BPM",
+      "status": "Steady"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.4,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Excellent vitals stability."
+  },
+  {
+    "id": "vit-6",
+    "date": "2026-10-23",
+    "time": "08:10 AM",
+    "bloodPressure": {
+      "systolic": 125,
+      "diastolic": 80,
+      "unit": "mmHg",
+      "status": "Normal"
+    },
+    "bloodSugar": {
+      "value": 112,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 73,
+      "unit": "BPM",
+      "status": "Steady"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.3,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Post pranayama meditation."
+  },
+  {
+    "id": "vit-5",
+    "date": "2026-10-24",
+    "time": "08:30 AM",
+    "bloodPressure": {
+      "systolic": 120,
+      "diastolic": 80,
+      "unit": "mmHg",
+      "status": "Normal (சீரானது)"
+    },
+    "bloodSugar": {
+      "value": 108,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 72,
+      "unit": "BPM",
+      "status": "Steady"
+    },
+    "spo2": {
+      "value": 99,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.5,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Routine check by caregiver Priya."
+  },
+  {
+    "id": "vit-4",
+    "date": "2026-10-25",
+    "time": "08:15 AM",
+    "bloodPressure": {
+      "systolic": 128,
+      "diastolic": 84,
+      "unit": "mmHg",
+      "status": "Mildly Elevated"
+    },
+    "bloodSugar": {
+      "value": 118,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 76,
+      "unit": "BPM",
+      "status": "Normal"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.4,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Slept late previous night; advised to drink warm water."
+  },
+  {
+    "id": "vit-3",
+    "date": "2026-10-26",
+    "time": "08:00 AM",
+    "bloodPressure": {
+      "systolic": 124,
+      "diastolic": 82,
+      "unit": "mmHg",
+      "status": "Normal"
+    },
+    "bloodSugar": {
+      "value": 115,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 70,
+      "unit": "BPM",
+      "status": "Steady"
+    },
+    "spo2": {
+      "value": 97,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.2,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Good morning reading."
+  },
+  {
+    "id": "vit-2",
+    "date": "2026-10-26",
+    "time": "06:30 PM",
+    "bloodPressure": {
+      "systolic": 122,
+      "diastolic": 82,
+      "unit": "mmHg",
+      "status": "Normal (சீரானது)"
+    },
+    "bloodSugar": {
+      "value": 142,
+      "type": "Post-Meal (உணவுக்குப் பின்)",
+      "unit": "mg/dL",
+      "status": "Good"
+    },
+    "pulse": {
+      "value": 74,
+      "unit": "BPM",
+      "status": "Steady"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.6,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Evening reading after park stroll with walking stick."
+  },
+  {
+    "id": "vit-1",
+    "date": "2026-10-27",
+    "time": "08:15 AM",
+    "bloodPressure": {
+      "systolic": 120,
+      "diastolic": 80,
+      "unit": "mmHg",
+      "status": "Normal (சீரானது)"
+    },
+    "bloodSugar": {
+      "value": 110,
+      "type": "Fasting (வெறும் வயிறு)",
+      "unit": "mg/dL",
+      "status": "Normal"
+    },
+    "pulse": {
+      "value": 72,
+      "unit": "BPM",
+      "status": "Steady (அமைதி)"
+    },
+    "spo2": {
+      "value": 98,
+      "unit": "%",
+      "status": "Optimal"
+    },
+    "temperature": {
+      "value": 98.4,
+      "unit": "°F",
+      "status": "Normal"
+    },
+    "notes": "Morning routine vitals. Feeling calm and energized."
+  }
+]

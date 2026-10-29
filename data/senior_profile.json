@@ -1,0 +1,40 @@
+{
+  "name": "Ramanathan Subramanian",
+  "tamilName": "ராமநாதன் சுப்ரமணியன்",
+  "honorific": "ஐயா (Sir)",
+  "age": 72,
+  "gender": "Male",
+  "bloodGroup": "O+ Positive",
+  "height": "168 cm",
+  "weight": "66.5 kg",
+  "residence": "Flat 3B, Shanthi Niketan Apartments, T. Nagar, Chennai - 600017",
+  "primaryCaregiver": {
+    "name": "Priya Ramanathan",
+    "relation": "Daughter",
+    "phone": "+91 98401 23456",
+    "status": "Active & Monitoring",
+    "tamilStatus": "செயலில் உள்ளார் & கவனித்து வருகிறார்"
+  },
+  "doctor": {
+    "name": "Dr. K. Arvind MD (Cardio)",
+    "hospital": "Kauvery / Apollo Clinic",
+    "phone": "+91 94440 98765",
+    "nextAppointment": "2026-11-05 (10:30 AM)"
+  },
+  "chronicConditions": [
+    { "name": "Type-2 Diabetes", "tamil": "வகை-2 சர்க்கரை நோய்", "since": "2015" },
+    { "name": "Hypertension (BP)", "tamil": "உயர் ரத்த அழுத்தம்", "since": "2012" },
+    { "name": "Mild Knee Osteoarthritis", "tamil": "முழங்கால் தேய்மானம்", "since": "2020" }
+  ],
+  "allergies": [
+    { "name": "Sulfa drugs", "severity": "Moderate" },
+    { "name": "Shellfish", "severity": "Mild" }
+  ],
+  "preferences": {
+    "language": "Tamil / English",
+    "voiceSpeed": 1.0,
+    "highContrast": true,
+    "soundAlerts": true,
+    "seniorFont": true
+  }
+}

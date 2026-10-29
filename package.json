@@ -1,0 +1,23 @@
+{
+  "name": "eldercare-ai",
+  "version": "2.0.0",
+  "description": "ElderCare AI – Smart Health & Senior Care Companion with Voice, Vitals, Medications and SOS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.x"
+  },
+  "keywords": [
+    "eldercare",
+    "senior-care",
+    "healthcare-ai",
+    "vitals-tracking",
+    "medication-schedule",
+    "sos-emergency"
+  ],
+  "author": "ElderCare AI Team",
+  "license": "MIT"
+}

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "sos-1793198502136",
+    "timestamp": "2026-10-28T14:41:42.136Z",
+    "type": "Instant 1-Tap SOS Button",
+    "status": "Cancelled by Senior (False Alarm / Drill)",
+    "triggeredBy": "Ramanathan Subramanian",
+    "location": {
+      "lat": 13.0418,
+      "lng": 80.2341,
+      "address": "T. Nagar, Chennai, Tamil Nadu - 600017 (Simulated GPS)"
+    },
+    "notified": [
+      "Priya Ramanathan (+91 98401 23456) - SMS & Phone Alert Sent",
+      "Emergency Ambulance 108 - Alert Queued"
+    ],
+    "whatsappMessageUrl": "https://wa.me/919840123456?text=EMERGENCY%20SOS%20ALERT%3A%20Ramanathan%20sir%20has%20triggered%20emergency%20assistance%20from%20ElderCare%20AI.%20Current%20Location%3A%20T.%20Nagar%2C%20Chennai.%20Please%20call%20immediately!",
+    "notes": "Emergency button pressed",
+    "cancelledAt": "2026-10-28T16:51:06.529Z"
+  },
+  {
+    "id": "sos-drill-1",
+    "timestamp": "2026-10-20T10:15:00.000Z",
+    "type": "Test Drill / சோதனை அழைப்பு",
+    "status": "Resolved / Closed",
+    "triggeredBy": "Ramanathan (Device Test)",
+    "location": {
+      "lat": 13.0418,
+      "lng": 80.2341,
+      "address": "T. Nagar, Chennai"
+    },
+    "notified": [
+      "Priya Ramanathan (+91 98401 23456)"
+    ],
+    "whatsappMessageUrl": "",
+    "notes": "Weekly SOS system audio and notification test. All systems operational.",
+    "cancelledAt": null
+  }
+]
